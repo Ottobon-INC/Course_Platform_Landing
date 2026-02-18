@@ -292,6 +292,9 @@ const Transformation: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           {/* Before Card */}
           <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             whileHover={{ y: -5 }}
             className="bg-white p-8 rounded-3xl border border-retro-salmon/20 shadow-lg relative overflow-hidden group"
           >
@@ -304,8 +307,7 @@ const Transformation: React.FC = () => {
               {[
                 "Binging tutorials without building",
                 "Resume ignored by recruiters",
-                "Feeling lost in technical interviews",
-                "Doubting if you count as a 'real' dev"
+                "Feeling lost in technical interviews"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-retro-salmon/50 mt-2.5 shrink-0" />
@@ -317,6 +319,9 @@ const Transformation: React.FC = () => {
 
           {/* After Card */}
           <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             whileHover={{ y: -10 }}
             className="bg-retro-teal text-white p-8 rounded-3xl border border-retro-sage/20 shadow-2xl relative overflow-hidden"
           >
@@ -329,8 +334,7 @@ const Transformation: React.FC = () => {
               {[
                 "Building & deploying complex apps",
                 "Github portfolio that proves skills",
-                "Speaking confidently about architecture",
-                "Knowing how to solve problems from scratch"
+                "Speaking confidently about architecture"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-retro-cyan mt-0.5 shrink-0" />
@@ -413,14 +417,12 @@ const QuantifiedProof: React.FC = () => {
 
 const forYou = [
   'You want to build real products, not just watch tutorials',
-  'You\'re from a non-CS background and need structured guidance',
   'You value honest feedback on your code over vanity progress',
   'You\'re preparing for developer roles at Indian tech companies',
 ];
 
 const notForYou = [
   'You want a certificate without doing the work',
-  'You prefer skipping ahead instead of mastering foundations',
   'You\'re looking for a passive video binge experience',
   'You need hand-holding without putting in practice hours',
 ];
@@ -749,7 +751,7 @@ const Methodology: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-[#244855] mb-2">Real-World Projects</h3>
               <p className="text-[#244855]/70 leading-relaxed text-sm">
-                Apply your learning through production-grade challenges and projects. You won't just watch videos; you'll build features, debug real codebases, and deploy live applications. As the curriculum unfolds, you'll leverage industry-standard tools and patterns.
+                Build features. Debug real code. Deploy live.
               </p>
             </div>
 
@@ -760,7 +762,7 @@ const Methodology: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-[#244855] mb-2">Active Learning</h3>
               <p className="text-[#244855]/70 leading-relaxed text-sm">
-                Immerse yourself in a dynamic, interactive learning experience. You'll engage in a new coding activity every three to five minutes through AI-guided quizzes and debugging exercises designed to accelerate your mastery.
+                A new coding challenge every 3–5 minutes.
               </p>
             </div>
 
@@ -771,7 +773,7 @@ const Methodology: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-[#244855] mb-2">Social & Mentorship</h3>
               <p className="text-[#244855]/70 leading-relaxed text-sm">
-                Join a global community of ambitious developers. Learn from peers and mentors. Collaborate on open-source initiatives, give code reviews, and share experiences to grow your career.
+                Peer reviews. Mentor guidance. Real collaboration.
               </p>
             </div>
           </div>
@@ -1309,7 +1311,7 @@ const AiStructure: React.FC = () => {
               >
                 <h3 className="text-3xl font-bold text-retro-teal mb-4">Contextual AI Chatbot</h3>
                 <p className="text-lg text-retro-teal/80 leading-relaxed">
-                  Stuck on a concept? Our RAG-powered AI assistant understands exactly which video timestamp you are watching. Ask it anything, and get instant, context-aware explanations without leaving the lesson.
+                  Ask anything, mid-lesson. Our AI knows exactly where you are.
                 </p>
               </motion.div>
 
@@ -1329,7 +1331,7 @@ const AiStructure: React.FC = () => {
                 <div className="bg-retro-cyan/10 text-retro-teal w-fit px-4 py-1 rounded-full text-sm font-bold mb-4">Structured Growth</div>
                 <h3 className="text-3xl font-bold text-retro-teal mb-4">The Smart Lock System</h3>
                 <p className="text-lg text-retro-teal/80 leading-relaxed">
-                  No skipping ahead. To ensure true mastery, future modules remain locked until you pass the micro-assessments of the current one. This guarantees you build a solid foundation before advancing.
+                  Pass the assessment. Unlock the next module. No shortcuts.
                 </p>
               </motion.div>
               <motion.div
@@ -1804,7 +1806,7 @@ const CallToAction: React.FC<{ onEnroll: () => void; onViewCurriculum: () => voi
         </motion.h2>
 
         <p className="text-xl text-retro-sage/80 mb-12 max-w-2xl mx-auto leading-relaxed">
-          Developers from Bengaluru to Jaipur are building their future here. Start your free trial with access to our first module.
+          Start your free trial. Build your first project this week.
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4">
@@ -1813,6 +1815,8 @@ const CallToAction: React.FC<{ onEnroll: () => void; onViewCurriculum: () => voi
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 className="bg-retro-salmon text-white px-10 py-5 rounded-full font-bold text-xl flex items-center gap-3 shadow-[0_0_30px_rgba(230,72,51,0.3)] hover:bg-white hover:text-retro-teal transition-all"
                 onClick={() => onEnroll()}
               >
@@ -1906,12 +1910,8 @@ const ProgressBar: React.FC = () => {
 
 const sectionNavItems = [
   { id: 'problem', label: 'Inertia' },
-  { id: 'solution', label: 'Solution' },
   { id: 'transformation', label: 'Growth' },
-  { id: 'career-path', label: 'Path' },
-  { id: 'proof', label: 'Proof' },
   { id: 'why', label: 'Why' },
-  { id: 'how', label: 'Method' },
   { id: 'courses', label: 'Courses' },
   { id: 'platform', label: 'Platform' },
   { id: 'reviews', label: 'Reviews' },
@@ -2189,14 +2189,14 @@ function App() {
         heroVariant={HERO_VARIANTS[heroVariantKey]}
       />
       <EmotionalHook />
-      <TurningPoint />
+      {/* <TurningPoint /> — removed: overlaps with EmotionalHook */}
       <Transformation />
-      <CareerPath />
-      <QuantifiedProof />
+      {/* <CareerPath /> — removed: repeats Transformation's message */}
+      {/* <QuantifiedProof /> — removed: stats already in CurriculumStructure header */}
       <AudienceFilter />
       {/* <TrustedBy /> removed */}
       <ValueProp />
-      <Methodology />
+      {/* <Methodology /> — removed: covered by ValueProp bento grid */}
       <CurriculumStructure />
       <AiStructure />
 
@@ -2205,7 +2205,7 @@ function App() {
       <Testimonials />
       {/* Faculty section removed */}
       {/* <Faculty /> */}
-      <MentorCTA onApplyTutor={handleApplyTutor} />
+      {/* <MentorCTA onApplyTutor={handleApplyTutor} /> — removed from page */}
       {/* <Pricing onEnroll={() => handleEnroll(undefined, undefined, 'pricing')} /> removed */}
       <FAQ />
       <CallToAction onEnroll={() => handleEnroll(undefined, undefined, 'cta_bottom')} onViewCurriculum={handleViewCurriculum} />

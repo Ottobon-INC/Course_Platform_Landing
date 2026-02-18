@@ -128,7 +128,7 @@ const HeroSlide: React.FC<{ onEnroll: () => void; onSearch: (term: string) => vo
     };
 
     return (
-        <div ref={ref} className="w-full h-full min-h-screen flex items-center justify-center bg-gradient-to-br from-retro-bg via-white to-retro-sage/20 py-20 pt-28">
+        <div ref={ref} className="w-full h-full flex items-center justify-center bg-gradient-to-br from-retro-bg via-white to-retro-sage/20 overflow-hidden">
             {/* Background Parallax Image */}
             <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-30"></div>
@@ -263,15 +263,7 @@ const HeroSlide: React.FC<{ onEnroll: () => void; onSearch: (term: string) => vo
                 </motion.div>
             </div>
 
-            <motion.div
-                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-retro-teal/50"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-            >
-                <div className="flex flex-col items-center gap-2">
-                    <div className="w-px h-12 bg-gradient-to-b from-retro-sage to-transparent"></div>
-                </div>
-            </motion.div>
+
         </div>
     );
 };
@@ -296,7 +288,7 @@ const PromoSlide: React.FC<{
     };
 
     return (
-        <div className="w-full h-full min-h-screen flex items-center justify-center bg-[#FBE9D0]/30 py-20 pt-28">
+        <div className="w-full h-full flex items-center justify-center bg-[#FBE9D0]/30 overflow-hidden">
             <div className="w-full pl-6 md:pl-20 pr-6 grid md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-8">
                     {/* Badge */}
@@ -523,7 +515,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ onEnroll, onSearch, heroVar
         }
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % totalSlides);
-        }, 5000);
+        }, 8000);
         return () => clearInterval(interval);
     }, [isAutoplayPaused, isHoverPaused, totalSlides]);
 
@@ -537,7 +529,8 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ onEnroll, onSearch, heroVar
 
     return (
         <div
-            className="relative w-full min-h-screen overflow-hidden bg-retro-bg"
+            className="relative w-full overflow-hidden bg-retro-bg"
+            style={{ height: 'calc(100vh - 64px)', marginTop: '64px' }}
         >
             <AnimatePresence mode="wait">
                 <motion.div
@@ -574,7 +567,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ onEnroll, onSearch, heroVar
             </button>
 
             {/* Pagination Dots */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex gap-3">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 flex gap-3">
                 {[...Array(totalSlides)].map((_, index) => (
                     <button
                         key={index}
