@@ -1,4 +1,5 @@
 import { Switch, Route, useLocation } from "wouter";
+import { User } from "./types/user";
 import { buildApiUrl } from "@/lib/api";
 import { useEffect, useRef, useState } from "react";
 import { queryClient } from "./lib/queryClient";
@@ -158,7 +159,7 @@ function App({ isAuthenticated, user, setIsAuthenticated, setUser }: any) {
 
 function AppWithState() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<{ fullName?: string; email?: string; picture?: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // Check initial auth

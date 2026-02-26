@@ -16,6 +16,7 @@ import Navbar from '@/components/layout/Navbar';
 import HeroCarousel, { HeroVariant } from '@/components/landing/HeroCarousel';
 import LandingChatBot from '@/components/LandingChatBot';
 import { trackEvent } from '@/lib/analytics';
+import { User } from '@/types/user';
 
 import humanLoopImg from '@/assets/human-loop.png';
 import aiAssistantImg from '@/assets/ai-assistant.png';
@@ -415,78 +416,6 @@ const QuantifiedProof: React.FC = () => {
   );
 };
 
-const forYou = [
-  'You want to build real products, not just watch tutorials',
-  'You value honest feedback on your code over vanity progress',
-  'You\'re preparing for developer roles at Indian tech companies',
-];
-
-const notForYou = [
-  'You want a certificate without doing the work',
-  'You\'re looking for a passive video binge experience',
-  'You need hand-holding without putting in practice hours',
-];
-
-const AudienceFilter: React.FC = () => {
-  return (
-    <section className="py-12 md:py-20 bg-white">
-      <div className="container mx-auto px-6 max-w-5xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-bold text-retro-teal text-center mb-14"
-        >
-          Who Ottolearn Is For — And Who It Isn’t
-        </motion.h2>
-
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          {/* For You */}
-          <motion.div
-            initial={{ opacity: 0, x: -15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-retro-bg rounded-2xl p-8 border border-retro-sage/15"
-          >
-            <p className="text-sm font-bold text-retro-teal uppercase tracking-wider mb-6 flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-retro-sage/20 flex items-center justify-center"><Check size={12} className="text-retro-teal" /></span>
-              This is for you if…
-            </p>
-            <ul className="space-y-4">
-              {forYou.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-retro-teal/80 leading-relaxed">
-                  <CheckCircle size={16} className="text-retro-sage mt-0.5 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Not For You */}
-          <motion.div
-            initial={{ opacity: 0, x: 15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl p-8 border border-retro-sage/15"
-          >
-            <p className="text-sm font-bold text-retro-teal/60 uppercase tracking-wider mb-6 flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-retro-salmon/10 flex items-center justify-center"><X size={12} className="text-retro-salmon" /></span>
-              This is not for you if…
-            </p>
-            <ul className="space-y-4">
-              {notForYou.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-retro-teal/50 leading-relaxed">
-                  <X size={16} className="text-retro-salmon/40 mt-0.5 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const TrustedBy: React.FC = () => {
   return (
@@ -795,172 +724,6 @@ const Methodology: React.FC = () => {
   );
 };
 
-const modules = [
-  {
-    id: 1,
-    title: 'Foundations of Compute',
-    status: 'unlocked',
-    lessons: '8 Lessons',
-    quizzes: '2 Quizzes',
-    duration: '2h 15m',
-    highlight: true
-  },
-  {
-    id: 2,
-    title: 'Data Structures & Algorithms',
-    status: 'locked',
-    lessons: '14 Lessons',
-    quizzes: '2 Quizzes',
-    duration: '4h 30m',
-    tooltip: 'Pass Module 1 Quiz to Unlock'
-  }
-];
-
-const ScrollFillNumber = ({ number, label, strokeColor, fillColor }: { number: string, label: string, strokeColor: string, fillColor: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 80%", "center 50%"]
-  });
-
-  const color = useTransform(scrollYProgress, [0, 1], ["rgba(255,255,255,0)", fillColor]);
-
-  return (
-    <div ref={ref} className="inline-flex items-center gap-3">
-      <motion.span
-        className="font-black inline-block tracking-tighter"
-        style={{
-          fontSize: '5rem',
-          lineHeight: 0.8,
-          WebkitTextStroke: `2px ${strokeColor}`,
-          color
-        }}
-      >
-        {number}
-      </motion.span>
-      <span className="text-retro-teal italic font-light" style={{ fontFamily: 'cursive', fontSize: '1.5rem' }}>{label}</span>
-    </div>
-  );
-};
-
-const ModuleCard: React.FC<{ module: any; index: number }> = ({ module, index }) => {
-  const isUnlocked = module.status === 'unlocked';
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ delay: index * 0.1 }}
-      className={`relative md:ml-20 rounded-2xl p-6 border-2 transition-all duration-300 ${isUnlocked
-        ? 'bg-white border-retro-sage/30 shadow-xl shadow-retro-sage/10 scale-100 z-10 ring-4 ring-retro-sage/5'
-        : 'bg-retro-bg border-transparent grayscale opacity-80 hover:opacity-100 hover:grayscale-0'
-        }`}
-    >
-      {/* Connector Dot */}
-      <div className={`hidden md:flex absolute -left-20 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full items-center justify-center border-4 border-white z-20 ${isUnlocked ? 'bg-retro-salmon text-white shadow-lg scale-110' : 'bg-retro-sage/50 text-white'
-        }`}>
-        <span className="font-bold text-sm">{index + 1}</span>
-      </div>
-
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="flex items-start gap-5">
-          <div className={`w-14 h-14 rounded-xl flex items-center justify-center shrink-0 ${isUnlocked ? 'bg-retro-salmon/10 text-retro-salmon' : 'bg-white text-gray-300'
-            }`}>
-            {isUnlocked ? <Play size={24} fill="currentColor" /> : <Lock size={24} />}
-          </div>
-
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <h3 className={`font-bold text-lg md:text-xl ${isUnlocked ? 'text-retro-teal' : 'text-gray-500'}`}>
-                {module.title}
-              </h3>
-              {isUnlocked && <span className="bg-retro-salmon/20 text-retro-salmon text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">In Progress</span>}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500 mt-2 font-medium">
-              <span className="flex items-center gap-1.5"><FileCode size={16} className="text-gray-400" /> {module.lessons}</span>
-              <span className={`flex items-center gap-1.5 ${isUnlocked ? 'text-retro-teal font-bold' : ''}`}>
-                <ShieldCheck size={16} className={isUnlocked ? 'text-retro-salmon' : 'text-gray-400'} />
-                {module.quizzes}
-              </span>
-              <span className="flex items-center gap-1.5"><Clock size={16} className="text-gray-400" /> {module.duration}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full md:w-auto flex justify-end">
-          {isUnlocked ? (
-            <button className="w-full md:w-auto px-6 py-2.5 bg-retro-teal text-white text-sm font-bold rounded-lg shadow-lg shadow-retro-teal/20 hover:bg-retro-salmon transition-colors flex items-center justify-center gap-2">
-              Resume Module
-            </button>
-          ) : (
-            <div className="flex items-center gap-2 px-4 py-2 bg-retro-bg text-gray-400 text-sm font-bold rounded-lg select-none">
-              <Lock size={14} /> Locked
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Tooltip hint for first locked item */}
-      {module.tooltip && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-          className="absolute -top-3 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 bg-retro-teal text-white text-xs font-medium px-3 py-1.5 rounded-md shadow-lg pointer-events-none z-30 whitespace-nowrap"
-        >
-          {module.tooltip}
-          <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-retro-teal rotate-45"></div>
-        </motion.div>
-      )}
-    </motion.div>
-  );
-};
-
-const CurriculumStructure: React.FC = () => {
-  return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="text-center mb-16">
-          <div className="text-retro-teal/70 text-lg md:text-xl font-medium flex flex-col items-center justify-center gap-6">
-
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-              <ScrollFillNumber
-                number="8"
-                label="Modules"
-                strokeColor="#E64833"
-                fillColor="#E64833"
-              />
-
-              <ScrollFillNumber
-                number="16"
-                label="Mandatory Quizzes"
-                strokeColor="#90AEAD"
-                fillColor="#90AEAD"
-              />
-            </div>
-
-            <div className="mt-2 text-lg">
-              One Certification. <span className="text-retro-teal font-bold border-b-4 border-retro-salmon/30">No Skipping.</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          {/* Vertical connection line */}
-          <div className="absolute left-5 top-8 bottom-8 w-0.5 bg-retro-bg hidden md:block z-0"></div>
-
-          <div className="space-y-6 relative z-10">
-            {modules.map((module, index) => (
-              <ModuleCard key={module.id} module={module} index={index} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const courses: Course[] = [
   { id: 'ai-for-marketing', title: 'AI for Marketing', rating: 4.8, students: 1200, description: 'Master generative AI tools for content creation and strategy.', image: getCourseImage('AI for Marketing'), status: 'Available' },
@@ -1080,93 +843,6 @@ const TrendingCourses: React.FC<{
   );
 };
 
-const stats = [
-  { label: "Active Learners", value: 12500, suffix: "+" },
-  { label: "Cities Across India", value: 120, suffix: "+" },
-  { label: "Course Completion Rate", value: 98, suffix: "%" },
-  { label: "Certificates Verified", value: 4200, suffix: "+" },
-];
-
-const Counter = ({ from, to, duration }: { from: number; to: number; duration: number }) => {
-  const nodeRef = React.useRef<HTMLSpanElement>(null);
-
-  React.useEffect(() => {
-    const node = nodeRef.current;
-    if (!node) return;
-
-    const controls = {
-      value: from,
-      stop: false
-    };
-
-    const startTime = performance.now();
-
-    const animate = (time: number) => {
-      if (controls.stop) return;
-      const elapsed = (time - startTime) / 1000;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Easing function (easeOutExpo)
-      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-
-      const current = Math.floor(from + (to - from) * ease);
-      node.textContent = current.toLocaleString();
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-    return () => { controls.stop = true; };
-  }, [from, to, duration]);
-
-  return <span ref={nodeRef} />;
-};
-
-const StatItem: React.FC<{ stat: any; index: number }> = ({ stat, index }) => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  return (
-    <div ref={ref} className="text-center">
-      <div className="text-4xl md:text-5xl font-bold text-white mb-2 font-mono tracking-tight">
-        {isInView ? (
-          <Counter from={0} to={stat.value} duration={2} />
-        ) : (
-          "0"
-        )}
-        <span className="text-retro-sage">{stat.suffix}</span>
-      </div>
-      <p className="text-white/60 text-sm md:text-base font-medium uppercase tracking-wider">{stat.label}</p>
-    </div>
-  );
-};
-
-const PlatformStats: React.FC = () => {
-  return (
-    <section className="bg-retro-teal py-16 border-y border-retro-sage/20 overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {stats.map((stat, index) => (
-            <StatItem key={index} stat={stat} index={index} />
-          ))}
-        </div>
-
-        {/* Trust-bridge: stats → action */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <p className="text-white/60 text-sm mb-3">Join them — start learning for free today</p>
-          <p className="text-white/40 text-xs">Cancel anytime</p>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
 
 const ScrollFillText = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1998,7 +1674,7 @@ function App() {
     const stored = localStorage.getItem('isAuthenticated');
     return stored === 'true' && Boolean(session?.accessToken);
   });
-  const [user, setUser] = useState<{ fullName?: string; email?: string; picture?: string } | null>(() => {
+  const [user, setUser] = useState<User | null>(() => {
     const raw = localStorage.getItem('user');
     if (!raw) return null;
     try {
@@ -2193,14 +1869,8 @@ function App() {
       <Transformation />
       {/* <CareerPath /> — removed: repeats Transformation's message */}
       {/* <QuantifiedProof /> — removed: stats already in CurriculumStructure header */}
-      <AudienceFilter />
-      {/* <TrustedBy /> removed */}
       <ValueProp />
-      {/* <Methodology /> — removed: covered by ValueProp bento grid */}
-      <CurriculumStructure />
       <AiStructure />
-
-      <PlatformStats />
 
       <Testimonials />
       {/* Faculty section removed */}

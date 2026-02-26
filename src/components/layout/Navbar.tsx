@@ -12,11 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-interface UserProfile {
-    fullName?: string;
-    email?: string;
-    picture?: string;
-}
+import { User as UserProfile } from '@/types/user';
 
 interface NavbarProps {
     onLogin?: () => void;
