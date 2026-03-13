@@ -1474,7 +1474,18 @@ const faqs = [
 ];
 
 const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (openIndex !== null) {
+        setOpenIndex(null);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [openIndex]);
 
   return (
     <section id="faq" className="py-16 md:py-24 bg-retro-bg">
