@@ -4,7 +4,8 @@ import {
   Play, ChevronRight, Search, Terminal, Users, LifeBuoy,
   PlayCircle, Lock, Brain, GitBranch, Award, FileCode, ShieldCheck, Clock,
   Star, Bot, Unlock, ArrowDown, Sparkles, Check, Quote, Linkedin, Twitter,
-  Plus, Minus, ArrowRight, BookOpen, LogOut, Menu, X, MessageSquare, CheckCircle
+  Plus, Minus, ArrowRight, BookOpen, LogOut, Menu, X, MessageSquare, CheckCircle,
+  Rocket
 } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { buildApiUrl } from '@/lib/api';
@@ -134,6 +135,58 @@ const HERO_VARIANTS: Record<string, HeroVariant> = {
   }
 };
 
+const WhoIsItFor: React.FC = () => {
+  return (
+    <section id="audience" className="py-20 bg-white">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-retro-teal mb-6">Who Is This For?</h2>
+          <p className="text-xl text-retro-teal/70">Designed for those who want to build, not just watch.</p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              title: "The Self-Explorers",
+              desc: "For those seeking a personalized approach towards learning and have the capability for self-exploration.",
+              icon: <Sparkles className="text-retro-yellow" />,
+              accent: "border-retro-yellow/20"
+            },
+            {
+              title: "Quick Absorbers",
+              desc: "If you can understand everything just by reading or using tools like ChatGPT, we help you apply that speed to real projects.",
+              icon: <Brain className="text-retro-cyan" />,
+              accent: "border-retro-cyan/20"
+            },
+            {
+              title: "Aspiring Builders",
+              desc: "For those who are tired of 'tutorial hell' and want to prove their competence through production-grade work.",
+              icon: <Rocket className="text-retro-salmon" />,
+              accent: "border-retro-salmon/20"
+            }
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
+              className={`bg-retro-bg p-8 rounded-3xl border ${item.accent} shadow-lg flex flex-col items-center text-center group`}
+            >
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
+                {item.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-retro-teal mb-4">{item.title}</h3>
+              <p className="text-retro-teal/70 leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const EmotionalHook: React.FC = () => {
   return (
     <section id="problem" className="py-20 md:py-32 bg-white relative overflow-hidden">
@@ -148,7 +201,8 @@ const EmotionalHook: React.FC = () => {
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            viewport={{ once: false }}
+            transition={{ delay: 0.1, duration: 0.6 }}
             className="text-sm font-bold text-retro-salmon tracking-widest uppercase mb-4"
           >
             If This Feels Familiar…
@@ -157,6 +211,7 @@ const EmotionalHook: React.FC = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
               You’ve watched course after course.
@@ -164,17 +219,19 @@ const EmotionalHook: React.FC = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }} // Increased delay for storytelling
+              viewport={{ once: false }}
+              transition={{ delay: 0.7, duration: 0.6 }}
             >
               You understand concepts.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.0, duration: 0.6 }} // More delay
+              viewport={{ once: false }}
+              transition={{ delay: 1.0, duration: 0.6 }}
               className="relative inline-block"
             >
-              But when it’s time to build… <span className="text-retro-salmon inline-block origin-center" style={{ animation: 'shake 0.8s cubic-bezier(.36,.07,.19,.97) both 2.8s' }}>you freeze.</span>
+              But when it’s time to build… <span className="text-retro-salmon inline-block origin-center" style={{ animation: 'shake 0.8s cubic-bezier(.36,.07,.19,.97) both 1.5s' }}>you freeze.</span>
             </motion.div>
           </div>
         </motion.div>
@@ -182,8 +239,8 @@ const EmotionalHook: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 40 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 3.2, duration: 0.8, type: "spring", bounce: 0.3 }}
+          viewport={{ once: false }}
+          transition={{ delay: 1.8, duration: 0.8, type: "spring", bounce: 0.3 }}
           className="text-center bg-retro-bg p-8 md:p-12 rounded-3xl border border-retro-sage/20 shadow-xl relative"
         >
           {/* Subtle background pulse */}
@@ -192,9 +249,33 @@ const EmotionalHook: React.FC = () => {
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
-          <p className="text-lg md:text-xl text-retro-teal/80 mb-4 font-medium">You start questioning if you’re “good enough.”</p>
-          <h3 className="text-3xl md:text-5xl font-black text-retro-teal mb-2">It’s not you.</h3>
-          <p className="text-2xl md:text-3xl font-bold text-retro-salmon">It’s the lack of structure.</p>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ delay: 2.1, duration: 0.6 }}
+            className="text-lg md:text-xl text-retro-teal/80 mb-4 font-medium"
+          >
+            You start questioning if you’re “good enough.”
+          </motion.p>
+          <motion.h3
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ delay: 2.4, duration: 0.6 }}
+            className="text-3xl md:text-5xl font-black text-retro-teal mb-2"
+          >
+            It’s not you.
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ delay: 2.7, duration: 0.6 }}
+            className="text-2xl md:text-3xl font-bold text-retro-salmon"
+          >
+            It’s the lack of structure.
+          </motion.p>
         </motion.div>
       </div>
       <style>{`
@@ -444,7 +525,7 @@ const ValueProp: React.FC = () => {
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-retro-teal">Why Ottolearn?</h2>
-          <p className="text-retro-teal/70 mt-4 text-lg">More than just videos. A complete ecosystem.</p>
+          <p className="text-retro-teal/70 mt-4 text-lg">Integrated with our "Training Wheels" framework for guided mastery.</p>
         </div>
 
         {/* Bento Grid Layout - Square Cards */}
@@ -544,6 +625,19 @@ const ValueProp: React.FC = () => {
           </motion.div>
 
         </div>
+
+        {/* Training Wheels Concept Mention */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 bg-white p-8 rounded-3xl border border-retro-sage/20 text-center max-w-3xl mx-auto shadow-sm"
+        >
+          <h3 className="text-2xl font-bold text-retro-teal mb-4">The "Training Wheels" Framework</h3>
+          <p className="text-retro-teal/70 leading-relaxed">
+            We provide deep feedback loops at every stage. Like training wheels, we provide the balance and support you need until you're ready to cycle through the complex projects independently.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
@@ -872,9 +966,9 @@ const ScrollFillText = () => {
             "--fill-progress": fillProgress
           }}
         >
-          We Don't Certify Attendance. We Certify Competence.
+          We Certify Competence, Not Just Attendance.
         </motion.span>
-        We Don't Certify Attendance. We Certify Competence.
+        We Certify Competence, Not Just Attendance.
       </motion.h2>
     </div>
   );
@@ -1370,8 +1464,13 @@ const Pricing: React.FC<{ onEnroll: () => void }> = ({ onEnroll }) => {
 
 const faqs = [
   { question: "How does the Lock System work?", answer: "The Lock System ensures you master a concept before moving forward. You must score at least 80% on the module assessment to unlock the next video." },
-  { question: "Is the certificate valid for jobs?", answer: "Yes! Our certificates are industry-recognized and can be used to showcase your skills when applying for jobs." },
-  { question: "Are the courses free?", answer: "Yes the courses are completely free, Payment is only required for the certificate after completing the course." },
+  { question: "Is the certificate valid for jobs?", answer: "Yes! Our certificates are industry-recognized and can be used to showcase your skills when applying for jobs and internships." },
+  { question: "Are there any courses for free?", answer: "Yes, we offer a free trial where you can explore the first module of every course to experience the platform yourself before deciding." },
+  { question: "What happens if I fail an assessment?", answer: "No worries! You can retake the assessment after a brief cooling-off period. We provide specific feedback on where you need to improve so you can master the content." },
+  { question: "Are there any prerequisites for these courses?", answer: "Most foundational courses start from scratch. For advanced tracks, we recommend completing the basic modules first or having a basic understanding of the core technologies." },
+  { question: "Do I get lifelong access to the course content?", answer: "Once you purchase a course or have an active Pro subscription, you have access to that content. Pro members get access to all courses while their subscription is active." },
+  { question: "Is there a community or forum for help?", answer: "Absolutely. We have a dedicated community and an in-platform discussion forum where you can interact with peers, share projects, and get help from mentors." },
+  { question: "Can I pay using UPI or local Indian payment methods?", answer: "Yes, we support all major Indian payment methods including UPI (Google Pay, PhonePe, Paytm), Net Banking, and Cards through our secure gateway." },
 ];
 
 const FAQ: React.FC = () => {
@@ -1379,12 +1478,12 @@ const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="py-16 md:py-24 bg-retro-bg">
-      <div className="container mx-auto px-6 max-w-3xl">
+      <div className="container mx-auto px-6 max-w-6xl">
         <h2 className="text-3xl font-bold text-center text-retro-teal mb-12">Frequently Asked Questions</h2>
 
-        <div className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-sm border border-retro-sage/20 overflow-hidden">
+            <div key={index} className="bg-white rounded-2xl shadow-sm border border-retro-sage/20 overflow-hidden h-fit">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex justify-between items-center p-6 text-left"
@@ -1496,13 +1595,10 @@ const CallToAction: React.FC<{ onEnroll: () => void; onViewCurriculum: () => voi
                 className="bg-retro-salmon text-white px-10 py-5 rounded-full font-bold text-xl flex items-center gap-3 shadow-[0_0_30px_rgba(230,72,51,0.3)] hover:bg-white hover:text-retro-teal transition-all"
                 onClick={() => onEnroll()}
               >
-                Start Free & Explore <ArrowRight />
+                Login / Signup <ArrowRight />
               </motion.button>
             </div>
           </div>
-          <p className="text-retro-sage/50 text-sm font-medium">
-            No credit card required · Explore before you commit
-          </p>
         </div>
 
       </div>
@@ -1558,7 +1654,7 @@ const MobileStickyCTA: React.FC<{ onEnroll: () => void }> = ({ onEnroll }) => {
               onClick={onEnroll}
               className="bg-retro-salmon text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-retro-salmon/20 active:scale-95 transition-transform whitespace-nowrap"
             >
-              Start Free
+              Login / Signup
             </button>
           </div>
         </motion.div>
@@ -1867,12 +1963,13 @@ function App() {
       <EmotionalHook />
       {/* <TurningPoint /> — removed: overlaps with EmotionalHook */}
       <Transformation />
+      <WhoIsItFor />
       {/* <CareerPath /> — removed: repeats Transformation's message */}
       {/* <QuantifiedProof /> — removed: stats already in CurriculumStructure header */}
       <ValueProp />
       <AiStructure />
 
-      <Testimonials />
+      {/* <Testimonials /> - Removed per user request to focus on 'experience it yourself' */}
       {/* Faculty section removed */}
       {/* <Faculty /> */}
       {/* <MentorCTA onApplyTutor={handleApplyTutor} /> — removed from page */}

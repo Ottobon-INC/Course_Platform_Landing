@@ -162,12 +162,20 @@ const MethodologyPage: React.FC = () => {
                 {/* CTA Section */}
                 <div className="container mx-auto px-6 text-center mt-32">
                     <div className="bg-white p-12 rounded-[2.5rem] shadow-xl border border-retro-sage/20 max-w-4xl mx-auto">
-                        <h3 className="text-3xl font-bold text-retro-teal mb-6">Ready to experience this yourself?</h3>
-                        <p className="text-lg text-retro-teal/70 mb-8 max-w-2xl mx-auto">
-                            Join thousands of learners who have transformed their careers with our methodology.
-                        </p>
-
-
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+                            <button
+                                onClick={() => setLocation('/our-courses/cohort')}
+                                className="bg-retro-teal text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest shadow-lg hover:bg-black transition-all hover:-translate-y-1"
+                            >
+                                Start Learning
+                            </button>
+                            <button
+                                onClick={() => setLocation('/')}
+                                className="bg-white text-retro-teal border-2 border-retro-teal px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-retro-teal hover:text-white transition-all hover:-translate-y-1"
+                            >
+                                Back to Home
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>

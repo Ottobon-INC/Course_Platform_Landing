@@ -179,7 +179,7 @@ const HeroSlide: React.FC<{ onEnroll: () => void; onSearch: (term: string) => vo
                                 whileTap={{ scale: 0.97 }}
                                 className="bg-retro-salmon text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl shadow-retro-salmon/20 transition-all flex items-center justify-center gap-2"
                             >
-                                Start Your Journey <ArrowRight size={20} />
+                                Login / Signup <ArrowRight size={20} />
                             </motion.button>
                             <button
                                 onClick={() => {
@@ -400,7 +400,7 @@ const PromoSlide: React.FC<{
                                 onMouseLeave={() => onHoverPauseChange(false)}
                                 className="bg-retro-salmon text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl shadow-retro-salmon/20 transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
-                                Start Free & Explore <ArrowRight size={20} />
+                                Login / Signup <ArrowRight size={20} />
                             </motion.button>
 
                             {/* Ghost secondary CTA */}
@@ -415,10 +415,6 @@ const PromoSlide: React.FC<{
                             </button>
                         </div>
 
-                        {/* Risk-reversal micro-copy */}
-                        <p className="text-sm text-retro-teal/50 font-medium">
-                            Explore before you commit
-                        </p>
                     </motion.div>
                 </div>
 
